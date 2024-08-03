@@ -27,6 +27,7 @@
             BtnList();
             BtnAddMaterial();
             clearForm();
+            removematerial();
         });
 
         var BtnView = function () {
@@ -52,17 +53,31 @@
             $('#select_gst_hsn').val('0');
             $('#txt_select_type').val('0');
             $('#txt_yield').val('');
+            $('#materials_value').html("<tr><td colspan=\"20\">No Data Found</td></tr>");
         };
 
         var BtnAddMaterial = function () {
             $('.btn_added').click(function () {
                 if (validate()) {
-                    tr += "<td style=\"text-align:center;vertical-align:middle;\">" + materials_value.txt_product_material + $('#materials_value').append(tr)  + "</td>";
-                    tr += "<td style=\"text-align:center;vertical-align:middle;\">" + materials_value.txt_tab_uom  + "</td>";
-                    tr += "<td style=\"text-align:center;vertical-align:middle;\">" + materials_value.txt_qty + "</td>";
-                    tr += "<td style=\"text-align:center;vertical-align:middle;\"><button class=\"btn-update-material btn btn-primary  btn-xs\">Edit</button>&nbsp;&nbsp;<button class=\"btn-remove-material btn btn-danger  btn-xs\">Remove</button></td>";
-                    $('#materials_value').html(tr);
+                    var tr = "<tr class=\"material\">";
+                    tr += "<td style=\"text-align:center;vertical-align:middle;\">" + ($('.material').length + 1) + "</td>";
+                    tr += "<td style=\"text-align:center;vertical-align:middle;\">" + $('#txt_product_material').val()  + "</td>";
+                    tr += "<td style=\"text-align:center;vertical-align:middle;\">" + $('#txt_tab_uom').val()  + "</td>";
+                    tr += "<td style=\"text-align:center;vertical-align:middle;\">" + $('#txt_qty').val() + "</td>";
+                    tr += "<td style=\"text-align:center;vertical-align:middle;\"><button type=\"button\" class=\"btn-update-material btn btn-primary  btn-xs\">Edit</button>&nbsp;&nbsp;<button type=\"button\" class=\"btn-remove-material btn btn-danger  btn-xs\">Remove</button></td>";
+                    tr += "</tr>";
+                    if ($('.material').length == 0)
+                        $('#materials_value').html(tr);
+                    else
+                        $('#materials_value').append(tr);
                 };
+            });
+        };
+
+        var removematerial = function () {
+            $('body').on('click','.btn-remove-material',function () {
+                alert('clicked');
+                $(this).closest('tr').remove();
             });
         };
 
