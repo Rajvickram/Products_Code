@@ -77,8 +77,9 @@
 
         var removematerial = function () {
             $('body').on('click','.btn-remove-material',function () {
-                alert('clicked');
+                // alert('clicked');
                 $(this).closest('tr').remove();
+                clearForm();
             });
         };
 
@@ -196,7 +197,7 @@
                         <div class="form-group row">
                             <label for="name" class="col-md-1 mt-2 control-label">Name :</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" id="txt_name" placeholder="Production Name">
+                                <input type="text" class="form-control" id="txt_name" placeholder="Production Name" style="text-transform: uppercase;">
                             </div>
                             <label for="uomvalue" class="mt-2 col-md-1 control-label">UOM :</label>
                             <div class="col-md-3">
