@@ -1,0 +1,11 @@
+$("body").on("click", ".btn-update-material", function (e) {
+    e.preventDefault();
+    $("#error").html("");
+    var tr = $(this).closest("tr");
+    material = tr.data("item");
+    $("#txt_material").val(material.materialname);
+    $("#txt_material").prop("disabled", true);
+    $("#txt_uom").val(material.uom);
+    $("#txt_qty").val(material.qty);
+    $("#btn-add-material").html("Update");
+});
