@@ -228,6 +228,7 @@
         var renderTable = function () {
             var tableBody = $('#materials_value');
             tableBody.empty();
+            var total = 0;
 
             materials.forEach(function (item, index) {
                 var tr = "<tr class=\"material\" data-id=\"" + item.id + "\">";
@@ -240,8 +241,9 @@
                 tr += "<td style=\"text-align:center;vertical-align:middle;\"><button type=\"button\" class=\"btn-update-material btn btn-primary btn-xs\">Edit</button>&nbsp;&nbsp;<button type=\"button\" class=\"btn-remove-material btn btn-danger btn-xs\">Remove</button></td>";
                 tr += "</tr>";
                 tableBody.append(tr);
+                total += item.total;
             });
-
+            $('#total).text(total > 0 ? total.toFixed(2) : "");
             updateSerialNumber();
             updateTotal();
         };
