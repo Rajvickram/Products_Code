@@ -26,7 +26,6 @@
             BtnView();
             BtnList();
             BtnAddMaterial();
-            //clearForm();
             removematerial();
             updateSerialNumber();
             updatematerial();
@@ -106,12 +105,6 @@
 
         var removematerial = function () {
             $('body').on('click', '.btn-remove-material', function () {
-
-                //1ST -- Method :
-                //$(this).closest('tr').remove();
-                //updateSerialNumber();
-
-                //2Nd -- Method :
                 var matid = $(this).closest('tr').data('id');
                 var index = -1;
                 $.each(materials, function (idx, item) {
@@ -146,6 +139,14 @@
                 $(this).find('td:eq(0)').html(index + 1);
             });
         };
+
+        var updateTotal = function () {
+            var total = 0;
+            $('#materials_value').each(function (index, items) {
+                total += parseFloat($(this).find('td.total').html());
+            })
+            $('#total').text(total > 0 ? total.toFixed(2) : "");
+        }
 
         var validate = function () {
             $('.txt_shown_error').html('');
@@ -235,13 +236,14 @@
                 tr += "<td style=\"text-align:center;vertical-align:middle;\">" + item.uom + "</td>";
                 tr += "<td style=\"text-align:center;vertical-align:middle;\">" + item.cost + "</td>";
                 tr += "<td style=\"text-align:center;vertical-align:middle;\">" + item.qty + "</td>";
-                tr += "<td style=\"text-align:center;vertical-align:middle;\">" + item.total + "</td>";
+                tr += "<td class=\"total\" style=\"text-align:center;vertical-align:middle;\">" + item.total.toFixed(2) + "</td>";
                 tr += "<td style=\"text-align:center;vertical-align:middle;\"><button type=\"button\" class=\"btn-update-material btn btn-primary btn-xs\">Edit</button>&nbsp;&nbsp;<button type=\"button\" class=\"btn-remove-material btn btn-danger btn-xs\">Remove</button></td>";
                 tr += "</tr>";
                 tableBody.append(tr);
             });
 
             updateSerialNumber();
+            updateTotal();
         };
     </script>
 </head>
